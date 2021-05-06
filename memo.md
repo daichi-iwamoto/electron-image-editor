@@ -14,6 +14,10 @@ npm i --save-dev electron
 
 ```bash=
 npm install electron-packager --save-dev
-```
 
-electron-packager image-editor --platform=all --arch=all
+# windows
+electron-packager ./ image-editor --platform=win32 --arch=x64
+
+# mac
+electron-packager ./ image-editor --platform=darwin --arch=x64
+```

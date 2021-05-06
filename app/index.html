@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Electron Image Editor</title>
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
-    <script src="image-editor.js"></script>
+	<meta charset="UTF-8">
+	<title>Electron Image Editor</title>
+	<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+	<script src="./image-editor.js"></script>
+	<link rel="stylesheet" href="./index.css">
 </head>
 <body style="background: white;">
-    <h1>Electron Image Editor</h1>
-    <button onclick="webp()">webp!</p>
+	<h1>Electron Image Editor</h1>
+
+	<section>
+		<h2>Webp変換</h2>
+		<p class="caution">
+			デフォルトのクオリティは80です<br>
+			クオリティが低くなるほど画像サイズは小さくなり、画質は荒くなります。
+		</p>
+		<label for="webp-quality">
+			Quality：
+			<input id="quality-input" name="webp-quality" type="range" step="10" value="80" min="10">
+			<p id="quality-value">80</p>
+		</label>
+		<button onclick="webp()">webp！</p>
+	</section>
 </body>
+<script src="./index.js"></script>
 </html>
