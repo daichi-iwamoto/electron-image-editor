@@ -1,16 +1,33 @@
 const { contextBridge } = require('electron')
 const sharp = require('sharp')
+const fs = require('fs')
 
 contextBridge.exposeInMainWorld('modules', {
-  fs: require('fs'),      // fs module
+  fs: fs,      // fs module
 
   // wepb task
-  sharp_webp: (target, quality) => {
+  sharp_webp: (target, filename, quality) => {
     const progress = document.getElementById('progress')
 
-    sharp(`./_img/${target}`)
+    // 入力元
+    let input = target.replace(/\\/g, '/')
+
+    // 出力先
+    let outdir = target.replace(filename, '')
+    outdir = outdir.replace(/\\/g, '/')
+
+    // webpディレクトリ作成
+    if (!fs.existsSync(`${outdir}../webp/`)) {
+      fs.mkdirSync(`${outdir}../webp/`, (err) => {
+        if (err) { throw err } else {
+          console.log("made webp dir !")
+        }
+      })
+    }
+
+    sharp(`${input}`)
       .webp({quality: quality})
-      .toFile(`./_webp/${target}.webp`, (err, info) => {
+      .toFile(`${outdir}../webp/${filename}.webp`, (err, info) => {
         const li = document.createElement('li')
         let text
         
@@ -19,28 +36,45 @@ contextBridge.exposeInMainWorld('modules', {
           console.log(err);
 
           // エラー表示
-          text = document.createTextNode(`【${target}】 webp err !!!`)
+          text = document.createTextNode(`【${input}】 webp err !!!`)
+          li.appendChild(text)
+          progress.appendChild(li)
+        } else {
+          console.log(info);
+          console.log('/' + input + ' Done (´-ω-`)');
+  
+          // 完了表示
+          text = document.createTextNode(`【${input}】 convert to webp !`)
           li.appendChild(text)
           progress.appendChild(li)
         }
-        console.log(info);
-        console.log(target + ' Done (´-ω-`)');
-
-        // 完了表示
-        text = document.createTextNode(`【${target}】 convert to webp !`)
-        li.appendChild(text)
-        progress.appendChild(li)
       })
   },
 
   // compress task
-  sharp_compress: (target, quality) => {
+  sharp_compress: (target, filename, quality) => {
     const progress = document.getElementById('progress')
 
-    sharp(`./_img/${target}`)
+    // 入力元
+    let input = target.replace(/\\/g, '/')
+
+    // 出力先
+    let outdir = target.replace(filename, '')
+    outdir = outdir.replace(/\\/g, '/')
+
+    // compressedディレクトリ作成
+    if (!fs.existsSync(`${outdir}../compressed/`)) {
+      fs.mkdirSync(`${outdir}../compressed/`, (err) => {
+        if (err) { throw err } else {
+          console.log("made compressed dir !")
+        }
+      })
+    }
+
+    sharp(`${input}`)
       .png({quality: quality/10})
       .jpeg({quality: quality})
-      .toFile(`./_compressed/${target}`, (err, info) => {
+      .toFile(`${outdir}../compressed/${filename}.webp`, (err, info) => {
         const li = document.createElement('li')
         let text
 
@@ -49,7 +83,7 @@ contextBridge.exposeInMainWorld('modules', {
           console.log(err);
 
           // エラー表示
-          text = document.createTextNode(`【${target}】 compress err !!!`)
+          text = document.createTextNode(`【${input}】 compress err !!!`)
           li.appendChild(text)
           progress.appendChild(li)
         }
@@ -57,22 +91,38 @@ contextBridge.exposeInMainWorld('modules', {
         console.log(target + ' Done (´-ω-`)');
 
         // 完了表示
-        text = document.createTextNode(`【${target}】 compressed !`)
+        text = document.createTextNode(`【${input}】 compressed !`)
         li.appendChild(text)
         progress.appendChild(li)
       })
   },
 
   // resize task
-  sharp_resize: (target, Width, Height) => {
+  sharp_resize: (target, filename, Width, Height) => {
     const progress = document.getElementById('progress')
 
-    sharp(`./_img/${target}`)
+    // 入力元
+    let input = target.replace(/\\/g, '/')
+
+    // 出力先
+    let outdir = target.replace(filename, '')
+    outdir = outdir.replace(/\\/g, '/')
+
+    // resizedディレクトリ作成
+    if (!fs.existsSync(`${outdir}../resized/`)) {
+      fs.mkdirSync(`${outdir}../resized/`, (err) => {
+        if (err) { throw err } else {
+          console.log("made resized dir !")
+        }
+      })
+    }
+
+    sharp(`${input}`)
       .resize({
         width: Width,
         height: Height
       })
-      .toFile(`./_resized/${target}`, (err, info) => {
+      .toFile(`${outdir}../resized/${filename}`, (err, info) => {
         const li = document.createElement('li')
         let text
 
@@ -84,14 +134,15 @@ contextBridge.exposeInMainWorld('modules', {
           text = document.createTextNode(`【${target}】 resize err !!!`)
           li.appendChild(text)
           progress.appendChild(li)
+        } else {
+          console.log(info);
+          console.log(target + ' Done (´-ω-`)');
+  
+          // 完了表示
+          text = document.createTextNode(`【${target}】 resized !`)
+          li.appendChild(text)
+          progress.appendChild(li)
         }
-        console.log(info);
-        console.log(target + ' Done (´-ω-`)');
-
-        // 完了表示
-        text = document.createTextNode(`【${target}】 resized !`)
-        li.appendChild(text)
-        progress.appendChild(li)
       })
   }
 })
