@@ -9,7 +9,7 @@ function createWindow () {
       preload: path.join(__dirname, './app/preload.js')
     }
   })
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
   win.loadFile('./app/index.html')
 }
 

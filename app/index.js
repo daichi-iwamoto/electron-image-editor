@@ -1,11 +1,21 @@
-// quality output
-const qualityInput = document.getElementById("quality-input");
-const qualityTarget = document.getElementById("quality-value");
+// webp quality output
+const webpQualityInput = document.getElementById("webp-quality-input");
+const webpQualityTarget = document.getElementById("webp-quality-value");
 
-const rangeValue = (qualityInput, qualityTarget) => {
+const webpValue = (webpQualityInput, webpQualityTarget) => {
   return function () {
-    qualityTarget.innerHTML = qualityInput.value;
+    webpQualityTarget.innerHTML = webpQualityInput.value;
   };
 };
+webpQualityInput.addEventListener("input", webpValue(webpQualityInput, webpQualityTarget));
 
-qualityInput.addEventListener("input", rangeValue(qualityInput, qualityTarget));
+// compress quality output
+const CompressQualityInput = document.getElementById("compress-quality-input");
+const CompressQualityTarget = document.getElementById("compress-quality-value");
+
+const compressValue = (CompressQualityInput, CompressQualityTarget) => {
+  return function () {
+    CompressQualityTarget.innerHTML = CompressQualityInput.value;
+  };
+};
+CompressQualityInput.addEventListener("input", compressValue(CompressQualityInput, CompressQualityTarget));

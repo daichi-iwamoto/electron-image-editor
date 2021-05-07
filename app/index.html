@@ -10,18 +10,50 @@
 <body style="background: white;">
 	<h1>Electron Image Editor</h1>
 
+	<section id="progress-wrap">
+		<p>progress</p>
+		<ul id="progress"></ul>
+	</section>
+
 	<section>
 		<h2>Webp変換</h2>
 		<p class="caution">
 			デフォルトのクオリティは80です<br>
 			クオリティが低くなるほど画像サイズは小さくなり、画質は荒くなります。
 		</p>
-		<label for="webp-quality">
-			Quality：
-			<input id="quality-input" name="webp-quality" type="range" step="10" value="80" min="10">
-			<p id="quality-value">80</p>
-		</label>
-		<button onclick="webp()">webp！</p>
+		<div>
+			<p>Quality：<span id="webp-quality-value">80</span></p>
+			<input id="webp-quality-input" name="webp-quality" type="range" step="10" value="80" min="10">
+			<button onclick="webp()">webp！</button>
+		</div>
+	</section>
+
+	<section>
+		<h2>画像圧縮</h2>
+		<p class="caution">
+			デフォルトのクオリティは80です<br>
+			クオリティが低くなるほど画像サイズは小さくなり、画質は荒くなります。<br>
+			png, jpg 形式のみ対応です。
+		</p>
+		<div>
+			<p>Quality：<span id="compress-quality-value">80</span></p>
+			<input id="compress-quality-input" name="compress-quality" type="range" step="10" value="80" max="90" min="10">
+			<button onclick="compress()">compress！</button>
+		</div>
+	</section>
+
+	<section>
+		<h2>画像リサイズ</h2>
+		<p class="caution">
+			画像を一括リサイズします。<br>
+			※ 現段階では中央を基準に、アスペクト比を崩さないようにリサイズします。<br>
+			※ 単位は「px」です。
+		</p>
+		<div>
+			<label><p class="label">Width：</p><input type="number" id="resize-width"></label>
+			<label><p class="label">Height：</p><input type="number" id="resize-height"></label>
+			<button onclick="resize()">resize！</button>
+		</div>
 	</section>
 </body>
 <script src="./index.js"></script>
