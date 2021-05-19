@@ -29,7 +29,7 @@ contextBridge.exposeInMainWorld('modules', {
     sharp(input)
       .png({quality: quality/10})
       .jpeg({quality: quality})
-      .toFile(`${outdir}compressed/${filename}.webp`, (err, info) => {
+      .toFile(`${outdir}compressed/${filename}`, (err, info) => {
         const li = document.createElement('li')
         let text
 
