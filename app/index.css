@@ -1,3 +1,4 @@
+/* ----------- 共通 ----------- */
 body {
   padding: 0;
   margin: 0;
@@ -6,53 +7,22 @@ body {
 
 body * {
   box-sizing: border-box;
+  font-family: 'Courier New';
+  color: #51585a;
 }
 
 h1 {
   padding: 10px;
   margin: 0;
   width: 100%;
-  background-color: #00A3E2;
+  background-color: #393b3b;
+  border-bottom: solid 3px #505455;
   font-size: 22px;
+  font-weight: normal;
   color: #fff;
   position: fixed;
   top: 0;
   left: 0;
-}
-
-#progress-wrap {
-  width: 30%;
-  height: calc(100vh - 53px);
-  position: fixed;
-  right: 0;
-  top: 53px;
-  background-color: #f5f5f5;
-  border-left: 3px solid #eee;
-  padding: 10px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-
-#progress-wrap p {
-  font-size: 12px;
-  color: #8a8a8a;
-  border-bottom: double;
-  padding: 5px;
-}
-
-#progress-wrap ul {
-  overflow: scroll;
-  height: 80%;
-  width: 100%;
-  padding: 10px;
-}
-
-#progress-wrap ul li {
-  width: 100%;
-  font-size: 12px;
-  color: #8a8a8a;
-  list-style: none;
 }
 
 section {
@@ -70,7 +40,7 @@ section h2 {
   padding: 0 30px;
   margin: 0;
   font-size: 18px;
-  color: #00A3E2;
+  color: #51585a;
   width: 100%;
 }
 
@@ -79,12 +49,12 @@ section .caution {
   margin: 0;
   font-size: 12px;
   color: #8a8a8a;
-  width: 60%;
+  width: 100%;
   box-sizing: border-box;
 }
 
 section div {
-  width: 40%;
+  width: 90%;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -92,23 +62,16 @@ section div {
   flex-wrap: wrap;
 }
 
-section div.src {
-  width: 100%;
+section div.form {
+  background-color: #f1f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: inset 2px 2px 4px #e0e0e0;
 }
 
-section div.src label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-section div.src label p {
-  width: 100%;
-  padding: 10px 0;
-  margin: 0;
-  font-size: 12px;
-  color: #8a8a8a;
+section div .input-box {
+  width: 60%;
+  margin: 0 30px 0 0;
 }
 
 section div label {
@@ -120,7 +83,9 @@ section div label {
 }
 
 section div label p {
-  margin: 0;
+  width: auto;
+  font-size: 14px;
+  margin: 0 10px;
 }
 
 section div p {
@@ -133,9 +98,13 @@ section div p.label {
   text-align: left;
 }
 
+section div p.label.right {
+  text-align: right;
+}
+
 section div input[type="range"] {
-  width: 60%;
-  margin: 0 20%;
+  margin: 0;
+  width: 50%;
 }
 
 section div input[type="number"] {
@@ -153,15 +122,110 @@ section div button {
   text-align: center;
   width: 150px;
   padding: 10px;
-  margin: 20px 0 10px;
+  margin: 10px 0;
   border: none;
-  background-color: #00A3E2;
+  background-color: #51585a;
   color: #fff;
   border-radius: 5px;
   box-shadow: 3px 3px 3px #dadada, -3px -3px 3px #fff;
-  transition: .3s;
+  transition: .2s;
 }
 
 section div button:hover {
-  background-color: #4dbde9;
+  background-color: #ffa2b7;
 }
+/* ----------- 共通 ----------- */
+
+
+/* ----------- プログレスバー ----------- */
+#progress-wrap {
+  width: 30%;
+  height: calc(100vh - 54px);
+  position: fixed;
+  right: 0;
+  top: 54px;
+  background-color: #f5f5f5;
+  border-left: 3px solid #eee;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+#progress-wrap p {
+  font-size: 12px;
+  color: #8a8a8a;
+  border-bottom: double;
+  padding: 5px;
+}
+
+#progress-wrap ul {
+  overflow: auto;
+  height: 80%;
+  width: 100%;
+  padding: 10px;
+}
+
+#progress-wrap ul li {
+  width: 100%;
+  font-size: 12px;
+  color: #8a8a8a;
+  list-style: none;
+}
+/* ----------- プログレスバー ----------- */
+
+/* ----------- フォルダ選択部分 ----------- */
+section div.src {
+  width: 100%;
+}
+
+section div.src label,
+section div.src p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  margin: 0;
+  font-size: 12px;
+  color: #8a8a8a;
+  width: auto;
+}
+
+section div.src p {
+  width: 100%;
+}
+
+section div.src label[for="input-img"] {
+  border: solid 1px #8a8a8a;
+  padding: 10px;
+  box-shadow: 3px 3px 5px #dadada, -3px -3px 5px #fff;
+  transition: .2s;
+}
+
+section div.src label[for="input-img"]:hover {
+  background-color: #ffa2b7;
+  color: #fff;
+  border: solid 1px #ffa2b7;
+}
+
+section div.src label#file-name {
+  padding: 10px;
+  margin: 0 10px;
+  width: 150px;
+}
+/* ----------- フォルダ選択部分 ----------- */
+
+/* ----------- Webp部分 ----------- */
+section#webp .caution {
+  width: 100%;
+}
+
+section#webp div label {
+  margin: 10px auto;
+}
+
+section#webp div label p {
+  margin: 0 10px;
+}
+/* ----------- Webp部分 ----------- */

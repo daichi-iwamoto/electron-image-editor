@@ -19,3 +19,15 @@ const compressValue = (CompressQualityInput, CompressQualityTarget) => {
   };
 };
 CompressQualityInput.addEventListener("input", compressValue(CompressQualityInput, CompressQualityTarget));
+
+// file name change
+const InputFile = document.getElementById("input-img");
+const fileName = document.getElementById("file-name");
+
+const outputFileName = (InputFile, fileName) => {
+  return function() {
+    console.log(InputFile.files.length);
+    fileName.innerHTML = `${InputFile.files.length}ファイル選択中`;
+  };
+};
+InputFile.addEventListener("input", outputFileName(InputFile, fileName));

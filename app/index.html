@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="./index.css">
 </head>
 <body style="background: white;">
-	<h1>Electron Image Editor</h1>
+	<h1>Electron Image Editor 🎨</h1>
 
 	<section id="progress-wrap">
 		<p>progress</p>
@@ -17,50 +17,61 @@
 
 	<section>
 		<div class="src">
-			<label for="input-img">
-				<p>元画像ディレクトリを選択してください。</p>
-				<input id="input-img" type="file" name="input-img" webkitdirectory directory />
-			</label>
+			<p>
+				画像の入っているフォルダを選択してください。<br>
+				※ ドラッグ&ドロップには対応していません。
+			</p>
+			<input id="input-img" type="file" name="input-img" webkitdirectory directory style="display: none;" />
+			<label for="input-img">フォルダを選択</label>
+			<label id="file-name">選択されていません。</label>
 		</div>
 	</section>
-
-	<section>
-		<h2>Webp変換</h2>
-		<p class="caution">
-			デフォルトのクオリティは80です<br>
-			クオリティが低くなるほど画像サイズは小さくなり、画質は荒くなります。
-		</p>
-		<div>
-			<p>Quality：<span id="webp-quality-value">80</span></p>
-			<input id="webp-quality-input" name="webp-quality" type="range" step="10" value="80" min="10">
-			<button onclick="webp()">webp！</button>
-		</div>
-	</section>
-
+	
 	<section>
 		<h2>画像圧縮</h2>
 		<p class="caution">
-			デフォルトのクオリティは80です<br>
+			デフォルトのクオリティは80です。<br>
 			クオリティが低くなるほど画像サイズは小さくなり、画質は荒くなります。<br>
-			png, jpg 形式のみ対応です。
+			png, jpg 形式対応
 		</p>
-		<div>
-			<p>Quality：<span id="compress-quality-value">80</span></p>
-			<input id="compress-quality-input" name="compress-quality" type="range" step="10" value="80" max="90" min="10">
+		<div class="form">
+			<div class="input-box">
+				<label>
+					<p>Quality：<span id="compress-quality-value">80</span></p>
+					<input id="compress-quality-input" name="compress-quality" type="range" step="10" value="80" max="90" min="10">
+				</label>
+			</div>
 			<button onclick="compress()">compress！</button>
+		</div>
+	</section>
+
+	<section id="webp">
+		<h2>Webp変換</h2>
+		<p class="caution">
+			デフォルトのクオリティは80です。<br>
+			クオリティが低くなるほど画像サイズは小さくなり、画質は荒くなります。
+		</p>
+		<div class="form">
+			<div class="input-box">
+				<label>
+					<p>Quality：<span id="webp-quality-value">80</span></p>
+					<input id="webp-quality-input" name="webp-quality" type="range" step="10" value="80" max="90" min="10">
+				</label>
+			</div>
+			<button onclick="webp()">webp！</button>
 		</div>
 	</section>
 
 	<section>
 		<h2>画像リサイズ</h2>
 		<p class="caution">
-			画像を一括リサイズします。<br>
-			※ 現段階では中央を基準に、アスペクト比を崩さないようにリサイズします。<br>
-			※ 単位は「px」です。
+			画像のアスペクト比を崩さないように、一括リサイズします。<br>
+			Width, Heightを指定した場合は中央を中心にトリミングし、<br>
+			Widthのみ、またはHeightのみ指定した場合は、アスペクト比に合わせて自動で拡大・縮小します。
 		</p>
-		<div>
-			<label><p class="label">Width：</p><input type="number" id="resize-width"></label>
-			<label><p class="label">Height：</p><input type="number" id="resize-height"></label>
+		<div class="form">
+			<label><p class="label right">Width：</p><input type="number" id="resize-width"><p class="label">px</p></label>
+			<label><p class="label right">Height：</p><input type="number" id="resize-height"><p class="label">px</p></label>
 			<button onclick="resize()">resize！</button>
 		</div>
 	</section>
