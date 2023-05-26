@@ -1,6 +1,6 @@
 # Electron Image Editor
 ## 概要
-Electronを使用して簡単に画像操作を行えるデスクトップアプリケーションを作成しました。
+Electronを使用して簡単に画像操作を行えるデスクトップアプリケーションを作成しました。  
 画像の編集には [Shape.js](https://www.npmjs.com/package/sharp) を使用しています。
 
 ### できる事
